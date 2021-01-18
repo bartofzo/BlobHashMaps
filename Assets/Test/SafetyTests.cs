@@ -160,24 +160,24 @@ namespace BlobHashMapsTest
             Assert.DoesNotThrow(() =>
             {
                 BlobBuilder builder = new BlobBuilder(Allocator.Temp);
-                ref var root = ref builder.ConstructRoot<BlobMultiHashMap<int, int>>();
+                ref var root = ref builder.ConstructRoot<BlobMultiHashMap<FixedString32, int>>();
                 var hashMapBuilder = builder.AllocateMultiHashMap(ref root, 10);
                 
-                hashMapBuilder.Add(420, 1);
-                hashMapBuilder.Add(420, 2);
-                hashMapBuilder.Add(420, 3);
-                hashMapBuilder.Add(69, 1);
-                hashMapBuilder.Add(69, 2);
-                hashMapBuilder.Add(69, 3);
+                hashMapBuilder.Add("420", 1);
+                hashMapBuilder.Add("420", 2);
+                hashMapBuilder.Add("420", 3);
+                hashMapBuilder.Add("69", 1);
+                hashMapBuilder.Add("69", 2);
+                hashMapBuilder.Add("69", 3);
             });
         }
 
         void HashMapKeyNotPresent()
         {
             BlobBuilder builder = new BlobBuilder(Allocator.Temp);
-            ref var root = ref builder.ConstructRoot<BlobHashMap<int, int>>();
+            ref var root = ref builder.ConstructRoot<BlobHashMap<FixedString32, int>>();
             var hashMapBuilder = builder.AllocateHashMap(ref root, 10);
-            hashMapBuilder.Add(420, 69);
+            hashMapBuilder.Add("420", 69);
             var blobRef = builder.CreateBlobAssetReference<BlobHashMap<int, int>>(Allocator.Persistent);
             int dummy = 0;
             Assert.Throws<KeyNotFoundException>(() => dummy = blobRef.Value[0] + blobRef.Value[1]);
