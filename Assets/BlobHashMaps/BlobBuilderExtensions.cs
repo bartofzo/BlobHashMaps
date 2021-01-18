@@ -29,7 +29,6 @@ namespace BlobHashMaps
             where TKey : struct, IEquatable<TKey>
             where TValue : struct
         {
-            // use source.Count() or source.Capacity ?
             int count = source.Count();
             var kv = source.GetKeyValueArrays(Allocator.Temp);
             var hashMapBuilder = builder.AllocateHashMap(ref blobHashMap, count);
@@ -49,7 +48,6 @@ namespace BlobHashMaps
             where TKey : struct, IEquatable<TKey>
             where TValue : struct
         {
-            // use source.Count() or source.Capacity ?
             int count = source.Count;
             int ratio = count <= UseBucketCapacityRatioOfThreeUpTo ? 3 : 2;
             
@@ -105,7 +103,6 @@ namespace BlobHashMaps
             where TKey : struct, IEquatable<TKey>
             where TValue : struct
         {
-            // use source.Count() or source.Capacity ?
             int count = source.Count();
 
             var kv = source.GetKeyValueArrays(Allocator.Temp);
@@ -127,7 +124,6 @@ namespace BlobHashMaps
             where TKey : struct, IEquatable<TKey>
             where TValue : struct
         {
-
             var hashmapBuilder = new BlobBuilderMultiHashMap<TKey, TValue>(capacity, capacity <= UseBucketCapacityRatioOfThreeUpTo ? 3 : 2, ref builder, ref blobMultiHashMap.data);
             return hashmapBuilder;
         }
@@ -149,7 +145,6 @@ namespace BlobHashMaps
             where TKey : struct, IEquatable<TKey>
             where TValue : struct
         {
-
             var hashmapBuilder = new BlobBuilderMultiHashMap<TKey, TValue>(capacity, bucketCapacityRatio, ref builder, ref blobMultiHashMap.data);
             return hashmapBuilder;
         }

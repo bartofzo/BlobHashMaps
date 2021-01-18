@@ -2,13 +2,9 @@
 #define BLOBHASHMAP_SAFE
 #endif
 
-
-
 using System;
 using Unity.Collections;
-using Unity.Collections.LowLevel.Unsafe;
 using Unity.Entities;
-using UnityEngine;
 
 namespace BlobHashMaps.Data
 {
