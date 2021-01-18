@@ -1,6 +1,7 @@
-#BlobHashMaps
+# BlobHashMaps
 
 From: https://docs.unity3d.com/Packages/com.unity.entities@0.3/api/Unity.Entities.BlobBuilder.html
+
 A blob asset is an immutable data structure stored in unmanaged memory. 
 Blob assets can contain primitive types, strings, structs, arrays, and arrays of arrays. Arrays and structs must only contain blittable types.
 
