@@ -104,6 +104,7 @@ namespace BlobHashMapsTest
                 ref var root = ref blobBuilder.ConstructRoot<BlobHashMap<TKey, int>>();
                 var blobBuilderHashmap = blobBuilder.AllocateHashMap(ref root, capacity, capacityFactor);
                 
+                
                 keys[i] = new NativeArray<TKey>(capacity * 2, Allocator.Persistent);
                 Fill(keys[i], hashmaps[i], ref blobBuilderHashmap, capacity);
                 

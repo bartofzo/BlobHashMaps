@@ -1,3 +1,9 @@
+/*
+ * Written by Bart van de Sande
+ * https://github.com/bartofzo/BlobHashMaps
+ * https://bartvandesande.nl
+ */
+
 #if ENABLE_UNITY_COLLECTIONS_CHECKS
 #define BLOBHASHMAP_SAFE
 #endif
@@ -10,7 +16,7 @@ using Unity.Entities;
 namespace BlobHashMaps
 {
     /// <summary>
-    /// A read only multihashmap that can be used as a blob asset
+    /// A read only multihashmap that can be used as inside blob asset
     /// </summary>
     [MayOnlyLiveInBlobStorage]
     public struct BlobMultiHashMap<TKey, TValue>

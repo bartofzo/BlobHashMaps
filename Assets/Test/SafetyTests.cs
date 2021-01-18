@@ -95,6 +95,7 @@ namespace BlobHashMapsTest
                 ref var root = ref builder.ConstructRoot<BlobHashMap<int2, int>>();
                 var hashMapBuilder = builder.AllocateHashMap(ref root, 10);
                 var blobRef = builder.CreateBlobAssetReference<BlobHashMap<int2, int>>(Allocator.Persistent);
+                
                 if (blobRef.Value.TryGetValue(int2.zero, out _))
                     throw new Exception("true was returned by TryGetValue while the hashmap is empty");
                 

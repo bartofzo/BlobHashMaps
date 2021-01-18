@@ -1,3 +1,9 @@
+/*
+ * Written by Bart van de Sande
+ * https://github.com/bartofzo/BlobHashMaps
+ * https://bartvandesande.nl
+ */
+
 #if ENABLE_UNITY_COLLECTIONS_CHECKS
 #define BLOBHASHMAP_SAFE
 #endif

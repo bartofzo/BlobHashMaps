@@ -1,3 +1,9 @@
+/*
+ * Written by Bart van de Sande
+ * https://github.com/bartofzo/BlobHashMaps
+ * https://bartvandesande.nl
+ */
+
 #if ENABLE_UNITY_COLLECTIONS_CHECKS
 #define BLOBHASHMAP_SAFE
 #endif
@@ -11,7 +17,7 @@ using Unity.Entities;
 namespace BlobHashMaps
 {
     /// <summary>
-    /// A read only hashmap that can be used as a blob asset
+    /// A read only hashmap that can be used inside a blob asset
     /// </summary>
     [MayOnlyLiveInBlobStorage]
     public struct BlobHashMap<TKey, TValue>
@@ -77,12 +83,12 @@ namespace BlobHashMaps
 
         internal BlobBuilderHashMap(int capacity, int bucketCapacityRatio, ref BlobBuilder blobBuilder, ref BlobHashMapData<TKey, TValue> data)
         {
-            #if BLOBHASHMAP_SAFE
+#if BLOBHASHMAP_SAFE
             if (capacity <= 0)
                 throw new ArgumentException("Must be greater than zero", nameof(capacity));
             if (bucketCapacityRatio <= 0)
                 throw new ArgumentException("Must be greater than zero", nameof(bucketCapacityRatio));
-            #endif
+#endif
             
             this.data = new BlobBuilderHashMapData<TKey, TValue>(capacity, bucketCapacityRatio, ref blobBuilder, ref data);
         }
