@@ -56,7 +56,7 @@ namespace BlobHashMapsTest
 
             BlobBuilder builder = new BlobBuilder(Allocator.Temp);
             ref var root = ref builder.ConstructRoot<BlobMultiHashMap<int, int>>();
-            builder.AllocateMultiHashMap(ref root, ref source);
+            builder.ConstructMultiHashMap(ref root, ref source);
             blobMapRef = builder.CreateBlobAssetReference<BlobMultiHashMap<int, int>>(Allocator.Persistent);
         
             //Debug.Log("NativeMultiHashMap Capacity: " + source.Capacity);

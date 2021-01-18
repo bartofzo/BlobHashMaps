@@ -30,7 +30,7 @@ namespace BlobHashMaps
         /// <param name="builder">Reference to the struct BlobBuilder used to construct the hashmap</param>
         /// <param name="blobHashMap">Reference to the struct BlobHashMap field</param>
         /// <param name="source">Source hashmap to copy keys and values from</param>
-        public static void AllocateHashMap<TKey, TValue>(
+        public static void ConstructHashMap<TKey, TValue>(
             this ref BlobBuilder builder, ref BlobHashMap<TKey, TValue> blobHashMap, ref NativeHashMap<TKey, TValue> source)
             where TKey : struct, IEquatable<TKey>
             where TValue : struct
@@ -49,7 +49,7 @@ namespace BlobHashMaps
         /// <param name="builder">Reference to the struct BlobBuilder used to construct the hashmap</param>
         /// <param name="blobHashMap">Reference to the struct BlobHashMap field</param>
         /// <param name="source">Source hashmap to copy keys and values from</param>
-        public static void AllocateHashMap<TKey, TValue>(
+        public static void ConstructHashMap<TKey, TValue>(
             this ref BlobBuilder builder, ref BlobHashMap<TKey, TValue> blobHashMap, Dictionary<TKey, TValue> source)
             where TKey : struct, IEquatable<TKey>
             where TValue : struct
@@ -104,7 +104,7 @@ namespace BlobHashMaps
         /// <param name="builder">Reference to the struct BlobBuilder used to construct the hashmap</param>
         /// <param name="blobMultiHashMap">Reference to the struct BlobMultiHashMap field</param>
         /// <param name="source">Source multihashmap to copy keys and values from</param>
-        public static void AllocateMultiHashMap<TKey, TValue>(
+        public static void ConstructMultiHashMap<TKey, TValue>(
             this ref BlobBuilder builder, ref BlobMultiHashMap<TKey, TValue> blobMultiHashMap, ref NativeMultiHashMap<TKey, TValue> source)
             where TKey : struct, IEquatable<TKey>
             where TValue : struct

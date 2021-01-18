@@ -65,7 +65,7 @@ namespace BlobHashMapsTest
 
             BlobBuilder builder = new BlobBuilder(Allocator.Temp);
             ref var root = ref builder.ConstructRoot<BlobHashMap<TKey, int>>();
-            builder.AllocateHashMap(ref root, ref source);
+            builder.ConstructHashMap(ref root, ref source);
 
 
             blobMapRef = builder.CreateBlobAssetReference<BlobHashMap<TKey, int>>(Allocator.Persistent);

@@ -37,7 +37,7 @@ ref var root = ref builder.ConstructRoot<BlobHashMap<int3, float>>();
             
 // AllocateHashMap is an extension method on BlobBuilder
 // we pass in the source hashmap to copy
-builder.AllocateHashMap(ref root, ref source);
+builder.ConstructHashMap(ref root, ref source);
             
 // create our blob asset reference, this can be a member of IComponentData
 var blobMapRef = builder.CreateBlobAssetReference<BlobHashMap<int3, float>>(Allocator.Persistent);
