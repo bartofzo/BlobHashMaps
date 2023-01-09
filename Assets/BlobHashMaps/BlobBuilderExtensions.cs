@@ -31,9 +31,9 @@ namespace BlobHashMaps
         /// <param name="blobHashMap">Reference to the struct BlobHashMap field</param>
         /// <param name="source">Source hashmap to copy keys and values from</param>
         public static void ConstructHashMap<TKey, TValue>(
-            this ref BlobBuilder builder, ref BlobHashMap<TKey, TValue> blobHashMap, ref NativeHashMap<TKey, TValue> source)
-            where TKey : struct, IEquatable<TKey>
-            where TValue : struct
+            this ref BlobBuilder builder, ref BlobHashMap<TKey, TValue> blobHashMap, ref NativeParallelHashMap<TKey, TValue> source)
+            where TKey : unmanaged, IEquatable<TKey>
+            where TValue : unmanaged
         {
             int count = source.Count();
             var kv = source.GetKeyValueArrays(Allocator.Temp);
@@ -51,8 +51,8 @@ namespace BlobHashMaps
         /// <param name="source">Source hashmap to copy keys and values from</param>
         public static void ConstructHashMap<TKey, TValue>(
             this ref BlobBuilder builder, ref BlobHashMap<TKey, TValue> blobHashMap, Dictionary<TKey, TValue> source)
-            where TKey : struct, IEquatable<TKey>
-            where TValue : struct
+            where TKey : unmanaged, IEquatable<TKey>
+            where TValue : unmanaged
         {
             int count = source.Count;
             int ratio = count <= UseBucketCapacityRatioOfThreeUpTo ? 3 : 2;
@@ -71,8 +71,8 @@ namespace BlobHashMaps
         /// <returns>Builder that can be ued to add values to the hashmap</returns>
         public static BlobBuilderHashMap<TKey, TValue> AllocateHashMap<TKey, TValue>(
             this ref BlobBuilder builder, ref BlobHashMap<TKey, TValue> blobHashMap, int capacity)
-            where TKey : struct, IEquatable<TKey>
-            where TValue : struct
+            where TKey : unmanaged, IEquatable<TKey>
+            where TValue : unmanaged
         {
             return AllocateHashMap(ref builder, ref blobHashMap, capacity, capacity <= UseBucketCapacityRatioOfThreeUpTo ? 3 : 2);
         }
@@ -91,8 +91,8 @@ namespace BlobHashMaps
         public static BlobBuilderHashMap<TKey, TValue> AllocateHashMap<TKey, TValue>(
             this ref BlobBuilder builder, ref BlobHashMap<TKey, TValue> blobHashMap, 
             int capacity, int bucketCapacityRatio)
-            where TKey : struct, IEquatable<TKey>
-            where TValue : struct
+            where TKey : unmanaged, IEquatable<TKey>
+            where TValue : unmanaged
         {
             var hashmapBuilder = new BlobBuilderHashMap<TKey, TValue>(capacity, bucketCapacityRatio, ref builder, ref blobHashMap.data);
             return hashmapBuilder;
@@ -105,9 +105,9 @@ namespace BlobHashMaps
         /// <param name="blobMultiHashMap">Reference to the struct BlobMultiHashMap field</param>
         /// <param name="source">Source multihashmap to copy keys and values from</param>
         public static void ConstructMultiHashMap<TKey, TValue>(
-            this ref BlobBuilder builder, ref BlobMultiHashMap<TKey, TValue> blobMultiHashMap, ref NativeMultiHashMap<TKey, TValue> source)
-            where TKey : struct, IEquatable<TKey>
-            where TValue : struct
+            this ref BlobBuilder builder, ref BlobMultiHashMap<TKey, TValue> blobMultiHashMap, ref NativeParallelMultiHashMap<TKey, TValue> source)
+            where TKey : unmanaged, IEquatable<TKey>
+            where TValue : unmanaged
         {
             int count = source.Count();
 
@@ -127,8 +127,8 @@ namespace BlobHashMaps
         /// <returns>Builder that can be ued to add values to the multihashmap</returns>
         public static BlobBuilderMultiHashMap<TKey, TValue> AllocateMultiHashMap<TKey, TValue>(
             this ref BlobBuilder builder, ref BlobMultiHashMap<TKey, TValue> blobMultiHashMap, int capacity)
-            where TKey : struct, IEquatable<TKey>
-            where TValue : struct
+            where TKey : unmanaged, IEquatable<TKey>
+            where TValue : unmanaged
         {
             var hashmapBuilder = new BlobBuilderMultiHashMap<TKey, TValue>(capacity, capacity <= UseBucketCapacityRatioOfThreeUpTo ? 3 : 2, ref builder, ref blobMultiHashMap.data);
             return hashmapBuilder;
@@ -148,8 +148,8 @@ namespace BlobHashMaps
         public static BlobBuilderMultiHashMap<TKey, TValue> AllocateMultiHashMap<TKey, TValue>(
             this ref BlobBuilder builder, ref BlobMultiHashMap<TKey, TValue> blobMultiHashMap, 
             int capacity, int bucketCapacityRatio)
-            where TKey : struct, IEquatable<TKey>
-            where TValue : struct
+            where TKey : unmanaged, IEquatable<TKey>
+            where TValue : unmanaged
         {
             var hashmapBuilder = new BlobBuilderMultiHashMap<TKey, TValue>(capacity, bucketCapacityRatio, ref builder, ref blobMultiHashMap.data);
             return hashmapBuilder;

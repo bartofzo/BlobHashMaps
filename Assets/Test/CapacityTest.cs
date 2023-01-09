@@ -17,14 +17,14 @@ namespace BlobHashMapsTest
     /// Benchmark to test blob hashmap's performance against nativehashmap using different bucket capacity ratios
     /// </summary>
     public abstract class CapacityTest<TKey> : MonoBehaviour
-        where TKey : struct, IEquatable<TKey>
+        where TKey : unmanaged, IEquatable<TKey>
     {
         private const int randomQueryRatio = 2;
 
         private static readonly int[] Capacities = new[] {1024, 8192, 16383, 16384, 32758, 65536};
         private static readonly int[] Ratios = new[] { 2, 3, 4 };
         
-        private NativeHashMap<TKey, int>[] hashmaps;
+        private NativeParallelHashMap<TKey, int>[] hashmaps;
         private BlobAssetReference<BlobHashMap<TKey, int>>[] blobHashmaps;
         private NativeArray<TKey>[] keys;
         private NativeArray<int> hashMapResult;
@@ -47,7 +47,7 @@ namespace BlobHashMapsTest
             TestRecursive(0);
         }
         
-        private void Fill(NativeArray<TKey> queries, NativeHashMap<TKey, int> hashmap, ref BlobBuilderHashMap<TKey, int> blobBuilderHashMap, 
+        private void Fill(NativeArray<TKey> queries, NativeParallelHashMap<TKey, int> hashmap, ref BlobBuilderHashMap<TKey, int> blobBuilderHashMap, 
             int amt)
         {
             for (int i = 0; i < amt; i++)
@@ -86,7 +86,7 @@ namespace BlobHashMapsTest
         private void Allocate(int capacityFactor)
         {
             if (hashmaps == null)
-                hashmaps = new NativeHashMap<TKey, int>[Capacities.Length];
+                hashmaps = new NativeParallelHashMap<TKey, int>[Capacities.Length];
             if (blobHashmaps == null)
                 blobHashmaps = new BlobAssetReference<BlobHashMap<TKey, int>>[Capacities.Length];
             if (keys == null)
@@ -98,7 +98,7 @@ namespace BlobHashMapsTest
             for (int i = 0; i < Capacities.Length; i++)
             {
                 int capacity = Capacities[i];
-                hashmaps[i] = new NativeHashMap<TKey, int>(capacity, Allocator.Persistent);
+                hashmaps[i] = new NativeParallelHashMap<TKey, int>(capacity, Allocator.Persistent);
                 
                 BlobBuilder blobBuilder = new BlobBuilder(Allocator.Temp);
                 ref var root = ref blobBuilder.ConstructRoot<BlobHashMap<TKey, int>>();
@@ -220,7 +220,7 @@ namespace BlobHashMapsTest
         public struct HashMapJob : IJob
         {
             [ReadOnly] public NativeArray<TKey> queries;
-            [ReadOnly] public NativeHashMap<TKey, int> hashmap;
+            [ReadOnly] public NativeParallelHashMap<TKey, int> hashmap;
             public NativeArray<int> result;
 
             public void Execute()

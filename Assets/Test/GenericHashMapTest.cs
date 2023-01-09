@@ -15,7 +15,7 @@ using Debug = UnityEngine.Debug;
 namespace BlobHashMapsTest
 {
     public abstract class GenericHashMapTest<TKey> : MonoBehaviour
-        where TKey : struct, IEquatable<TKey>
+        where TKey : unmanaged, IEquatable<TKey>
     {
         private const int itemCount = 10000;
         private const int queryCount = 100000;
@@ -23,7 +23,7 @@ namespace BlobHashMapsTest
 
         protected Unity.Mathematics.Random random;
 
-        private NativeHashMap<TKey, int> source;
+        private NativeParallelHashMap<TKey, int> source;
         private BlobAssetReference<BlobHashMap<TKey, int>> blobMapRef;
 
         private NativeArray<TKey> allKeys;
@@ -56,7 +56,7 @@ namespace BlobHashMapsTest
             }
 
             // construct source
-            source = new NativeHashMap<TKey, int>(16, Allocator.Persistent);
+            source = new NativeParallelHashMap<TKey, int>(16, Allocator.Persistent);
             for (int i = 0; i < itemCount; i++)
             {
                 source.TryAdd(allKeys[i], itemCount - i);
@@ -145,7 +145,7 @@ namespace BlobHashMapsTest
         [BurstCompile]
         struct Job1 : IJob
         {
-            [ReadOnly] public NativeHashMap<TKey, int> map;
+            [ReadOnly] public NativeParallelHashMap<TKey, int> map;
             [ReadOnly] public NativeArray<TKey> queries;
             public int testCount;
             public NativeArray<int> result;

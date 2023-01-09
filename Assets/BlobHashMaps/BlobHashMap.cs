@@ -21,8 +21,8 @@ namespace BlobHashMaps
     /// </summary>
     [MayOnlyLiveInBlobStorage]
     public struct BlobHashMap<TKey, TValue>
-        where TKey : struct, IEquatable<TKey>
-        where TValue : struct
+        where TKey : unmanaged, IEquatable<TKey>
+        where TValue : unmanaged
     {
         internal BlobHashMapData<TKey, TValue> data;
         

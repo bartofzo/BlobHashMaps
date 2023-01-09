@@ -18,7 +18,7 @@ namespace BlobHashMapsTest
         private const int itemCount = 100000;
         protected Unity.Mathematics.Random random;
 
-        private NativeMultiHashMap<int, int> source;
+        private NativeParallelMultiHashMap<int, int> source;
         private BlobAssetReference<BlobMultiHashMap<int, int>> blobMapRef;
     
         private NativeArray<int> allKeys;
@@ -47,7 +47,7 @@ namespace BlobHashMapsTest
             }
         
             // construct source
-            source = new NativeMultiHashMap<int, int>(allKeys.Length, Allocator.Persistent);
+            source = new NativeParallelMultiHashMap<int, int>(allKeys.Length, Allocator.Persistent);
             for (int i = 0; i < itemCount; i++)
             {
                 source.Add(allKeys[i], 1);
@@ -126,7 +126,7 @@ namespace BlobHashMapsTest
         [BurstCompile]
         struct NativeJob : IJob
         {
-            [ReadOnly] public NativeMultiHashMap<int, int> map;
+            [ReadOnly] public NativeParallelMultiHashMap<int, int> map;
             [ReadOnly] public NativeArray<int> queries;
             public NativeArray<int> result;
 

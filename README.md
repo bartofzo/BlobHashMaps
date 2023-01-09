@@ -8,6 +8,15 @@ Blob assets can contain primitive types, strings, structs, arrays, and arrays of
 This project provides read only hashmap structures that store their data in BlobArrays and is fully compatible with Unity's ECS and blob assets.
 There is no unsafe code and it only uses Unity's public API to minimze the chances of this breaking in any future Unity updates.
 
+### Important note:
+Unfortately, since Entities 0.17, you'll get a ConstructBlobWithRefTypeViolation when trying to use this.
+The generic type parameters are (wrongly) interpreted as a class. Unity has not provided a fixed for this yet. 
+You can circumvent this by commenting out line 149 in BlobAssetSafetyVerifier.cs and moving that entire package inside of your project.
+
+See this post:
+<a href="https://forum.unity.com/threads/entities-0-17-changelog.1020202/page-3#post-6791726">Entities 0.17 changelog</a>
+
+
 ### Use case
 Blob(Multi)HashMap can be stored as a BlobAssetReference on an ECS component. 
 This means individual entities can have access to unique hashmaps in a single job. Which is not possible using a Native(Multi)HashMap.
@@ -35,7 +44,7 @@ BlobBuilder builder = new BlobBuilder(Allocator.Temp);
 // Our blob asset will just be the hashmap itself, but it can also be a member of a larger struct
 ref var root = ref builder.ConstructRoot<BlobHashMap<int3, float>>();
             
-// AllocateHashMap is an extension method on BlobBuilder
+// ConstructHashMap is an extension method on BlobBuilder
 // we pass in the source hashmap to copy
 builder.ConstructHashMap(ref root, ref source);
             
