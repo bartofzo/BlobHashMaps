@@ -8,9 +8,9 @@ Blob assets can contain primitive types, strings, structs, arrays, and arrays of
 This project provides read only hashmap structures that store their data in BlobArrays and is fully compatible with Unity's ECS and blob assets.
 There is no unsafe code and it only uses Unity's public API to minimze the chances of this breaking in any future Unity updates.
 
-### Important note:
+## Important note:
 Unfortately, since Entities 0.17, you'll get a ConstructBlobWithRefTypeViolation when trying to use this.
-The generic type parameters are (wrongly) interpreted as a class. Unity has not provided a fixed for this yet. 
+The generic type parameters are (wrongly) interpreted as a class. Unity has not provided a fix for this yet. 
 You can circumvent this by commenting out line 149 in BlobAssetSafetyVerifier.cs and moving that entire package inside of your project.
 
 See this post:
